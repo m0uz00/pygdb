@@ -6,8 +6,16 @@ SRC_DIR = src
 BUILD_DIR = build
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(CC) $(CC_ARGS) $< -o $(BUILD_DIR)/$(name).o
-	@chmod +x $(BUILD_DIR)/$(name).o
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CC_ARGS) -c $< -o $@
 
-run: $(BUILD_DIR)/$(name).o 
-	@$(BUILD_DIR)/$(name).o $(path)
+$(BUILD_DIR)/$(name): $(OBJ)
+	$(CC) $(OBJ) -o $@
+	chmod +x $@
+	rm build/*.o
+
+run: $(BUILD_DIR)/$(name)
+	@$(BUILD_DIR)/$(name) $(path)
+
+clean:
+	rm -rf $(BUILD_DIR)/*

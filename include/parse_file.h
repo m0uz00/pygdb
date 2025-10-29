@@ -7,4 +7,8 @@
 
 char* parse(FILE* path);
 
+int count_lines(char* buffer);
+
+char* string_to_array(char* buffer, int lines);
+
 #endif
