@@ -37,3 +37,23 @@ char* split_string(char* buffer, char* delim){
 
   return string_to_arr(buffer, lines, delim);
 }
+
+list* append(list* list, list_item* item){
+  if(list->len == 0){
+    item->prev = NULL;
+    item->next = NULL;
+
+    list->head = item;
+    list->tail = item;
+    list->len++;
+
+    return list;
+  }
+
+  list->tail->next = item;
+  item->prev = list->tail;
+  list->tail = item;
+  list->len++;
+
+  return list;
+}

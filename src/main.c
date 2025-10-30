@@ -22,5 +22,7 @@ int main(int argc, char *argv[]){
 
   parse(fp);
 
+  printf("Opened file :)");
+
   return 0;
 }

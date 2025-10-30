@@ -5,28 +5,30 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-enum objectType {
-  function = 0,
-  variable = 1,
-} typedef objectType;
+struct line{
+  int line_num;
+  char* line_text;
+} typedef line;
 
 struct list_item{
-  int value;
+  line* line;
   struct list_item* prev;
   struct list_item* next;
 } typedef list_item;
 
 struct list{
-  list_item* item;
   list_item* head;
   list_item* tail;
+  int len;
 } typedef list;
 
-struct var{
-  int line_num;
-} typedef var;
+struct program {
+  list* funcs;
+  list* vars;
+  line* entry;
+} typedef program;
 
-list* append(list* list, int value);
+list* append(list* list, list_item* item);
 
 char* string_to_arr(char* buffer, int lines, char* delim);
 
