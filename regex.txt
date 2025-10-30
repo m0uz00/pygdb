@@ -1,0 +1,5 @@
+^(?!def|\t| |#|\d)\w+ # find potentially runnable code
+
+^(?:def )\w+(?:.*\(\):) # find function but only capture function name
+
+^\w+(?:.+=.+) # matches assignment (find potential variable names)
