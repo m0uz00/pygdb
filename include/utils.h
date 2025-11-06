@@ -36,4 +36,6 @@ int count_lines(char* buffer, char* delim);
 
 char* split_string(char* buffer, char* delim);
 
+list* arr_to_list(char* arr, int len);
+
 #endif

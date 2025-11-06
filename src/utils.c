@@ -57,3 +57,22 @@ list* append(list* list, list_item* item){
 
   return list;
 }
+
+list* arr_to_list(char* arr, int len){
+  list* new_list;
+  for(int i = 0; i < len; i++){
+    line* current_line;
+    current_line->line_num = i;
+    current_line->line_text = &arr[i];
+
+    list_item* new_element;
+    new_element->line = current_line;
+    new_element->prev = NULL;
+    new_element->next = NULL;
+    
+
+    new_list = append(new_list, new_element);
+  }
+  
+  return new_list;
+}

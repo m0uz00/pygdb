@@ -19,14 +19,21 @@ char* parse(FILE* f){
   }
   fclose(f);
 
+  int line_count = count_lines(buffer, "\n");
   char* file = split_string(buffer, "\n");
+
+  list* lines = arr_to_list(file, line_count);
 
   free(buffer);
 
   return "kys";
 }
 
-int find_first_line(char* file){
-  
+int find_first_line(list* lines){
+  regex_t regex;
+  char* exp = "^(?!def|\\t| |#|\\d)\\w+";
+
+
+
   return 0;
 };
