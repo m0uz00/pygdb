@@ -24,16 +24,33 @@ char* parse(FILE* f){
 
   list* lines = arr_to_list(file, line_count);
 
+  line* first_line = find_first_line(lines);
+
+  printf("%s", first_line->line_text);
+
+
   free(buffer);
 
   return "kys";
 }
 
-int find_first_line(list* lines){
+line* find_first_line(list* lines){
   regex_t regex;
   char* exp = "^(?!def|\\t| |#|\\d)\\w+";
+  int reti;
 
+  reti = regcomp(&regex, exp, 0);
+  list_item* current = lines->head;
+  for(int i = 0; i < lines->len; i++){
+    line* current_line = current->line;
+    reti = regexec(&regex , current_line->line_text, 0, NULL, 0);
+    if(!reti){
+      return current_line;
+    }
 
+    current = current->next;
+  }
+  regfree(&regex);
 
-  return 0;
+  return NULL;
 };

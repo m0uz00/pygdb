@@ -9,6 +9,6 @@
 
 char* parse(FILE* path);
 
-int find_first_line(list* lines);
+line* find_first_line(list* lines);
 
 #endif
