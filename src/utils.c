@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "../include/utils.h"
@@ -59,19 +61,31 @@ list* append(list* list, list_item* item){
 }
 
 list* arr_to_list(char* arr, int len){
-  list* new_list;
+  list* new_list = malloc(sizeof(new_list));
+  if(!new_list){
+    perror("malloc error");
+  }
   for(int i = 0; i < len; i++){
-    line* current_line;
+    line* current_line = malloc(sizeof(line));
+    if(!current_line){
+      perror("malloc error");
+    }
     current_line->line_num = i;
     current_line->line_text = &arr[i];
 
-    list_item* new_element;
+    list_item* new_element = malloc(sizeof(list_item));
+    if(!new_element){
+      perror("malloc error");
+    }
     new_element->line = current_line;
     new_element->prev = NULL;
     new_element->next = NULL;
     
 
     new_list = append(new_list, new_element);
+
+    free(current_line);
+    free(new_element);
   }
   
   return new_list;
