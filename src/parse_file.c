@@ -28,7 +28,6 @@ char* parse(FILE* f){
 
   printf("%s", first_line->line_text);
 
-
   free(buffer);
 
   return "kys";
@@ -40,18 +39,17 @@ line* find_first_line(list* lines){
   int reti;
 
   reti = regcomp(&regex, exp, 0);
-  list_item* current = lines->head;
+  list_item current = *lines->head;
   for(int i = 0; i < lines->len; i++){
     line* current_line = malloc(sizeof(line));
-    current_line = current->line;
+    current_line = current.line;
     if(current_line->line_text != NULL){
      
-      reti = regexec(&regex , current_line->line_text, 0, NULL, 0);
+      reti = regexec(&regex, current_line->line_text, 0, NULL, 0);
       if(!reti){
         return current_line;
       }
     }
-    current = current->next;
   }
   regfree(&regex);
 

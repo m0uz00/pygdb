@@ -38,4 +38,6 @@ char* split_string(char* buffer, char* delim);
 
 list* arr_to_list(char* arr, int len);
 
+list_item* ith_line(int i);
+
 #endif

@@ -61,7 +61,7 @@ list* append(list* list, list_item* item){
 }
 
 list* arr_to_list(char* arr, int len){
-  list* new_list = malloc(sizeof(new_list));
+  list* new_list = malloc(sizeof(list));
   if(!new_list){
     perror("malloc error");
   }
@@ -83,10 +83,10 @@ list* arr_to_list(char* arr, int len){
     
 
     new_list = append(new_list, new_element);
-
-    free(current_line);
-    free(new_element);
   }
   
   return new_list;
+}
+
+list_item* ith_line(int i){
 }

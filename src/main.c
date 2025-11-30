@@ -14,6 +14,7 @@ int main(int argc, char *argv[]){
 
   printf("Attempting to open: %s\n", path);
 
+  printf("No segfault yet");
   FILE* fp = fopen(path, "r+");
   if(!fp){
     perror("File cant be opened");
