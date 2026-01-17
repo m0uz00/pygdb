@@ -30,13 +30,13 @@ struct program {
 
 list* append(list* list, list_item* item);
 
-char* string_to_arr(char* buffer, int lines, char* delim);
+char** string_to_arr(char* buffer, int lines, char* delim);
 
-int count_lines(char* buffer, char* delim);
+int count_lines(char* buffer);
 
-char* split_string(char* buffer, char* delim);
+char** split_string(char* buffer, char* delim);
 
-list* arr_to_list(char* arr, int len);
+list* arr_to_list(char** arr, int len);
 
 list_item* ith_line(int i);
 
