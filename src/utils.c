@@ -23,9 +23,13 @@ int count_lines(char* buffer){
   int lines = 0;
   char* ptr = buffer;
   while (*ptr) {
-     if (*ptr == '\n') lines++;
-     ptr++;
+    if (*ptr == '\n') {
+      if (*(ptr + 1) != '\n' && *(ptr + 1) != '\0') {
+         lines++;
+      }
     }
+      ptr++;
+  }
   return lines + 1;
 }
 

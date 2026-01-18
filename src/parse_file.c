@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <regex.h>
+#include <pcre.h>
+#include <string.h>
 
 #include "../include/parse_file.h"
 #include "../include/utils.h"
+
+#define OVECCOUNT 30
 
 char* parse(FILE* f){
   long length;
@@ -28,7 +31,7 @@ char* parse(FILE* f){
     line* first_line = find_first_line(lines);
 
     if (first_line != NULL) {
-        printf("%s\n", first_line->line_text);
+        printf("First runnable line: %s\n", first_line->line_text);
     } else {
         printf("No matching line found.\n");
     }
@@ -41,29 +44,36 @@ line* find_first_line(list* lines){
   if (lines == NULL || lines->head == NULL) {
       return NULL;
   }
-
-  regex_t regex;
-  const char* exp = "^(?!def|\\t| |#|\\d)\\w+";
-  int reti;
-
-  reti = regcomp(&regex, exp, 0);
+  
+  pcre *re;
+  char* pattern = "^(?!def|\\t| |#|\\d)\\w+(.*)?";
   
   list_item* current = lines->head;
   line* result = NULL;
+  const char* error;
+  int erroroffset;
+  int ovector[OVECCOUNT];
+  int rc;
+  
+  if (re == NULL){
+    perror("Error compiling expression");
+  }
 
   while (current!=NULL){
     line* current_line = current->line;
 
-    if (current_line != NULL && current_line->line_text != NULL){
-      reti = regexec(&regex, current_line->line_text,0 ,NULL, 0);
-      if (!reti){
+    char* subject = current_line->line_text;
+    int subject_len = (int)strlen(subject);
+    re = pcre_compile(pattern, 0, &error, &erroroffset, NULL);
+    if (current_line != NULL && current_line->line_text != NULL){        
+      rc = pcre_exec(re, NULL, subject, subject_len, 0, 0, ovector, OVECCOUNT);
+      if (rc > 0){
         result = current_line;
         break;
       }
     }
     current = current->next;
   }
-  regfree(&regex);
-
+  pcre_free(re);
   return result;
 };

@@ -1,7 +1,8 @@
 name = pygdb
 path = sample/sample.py
 CC := gcc
-CC_ARGS := -I./include/
+CC_ARGS := -I./include/ 
+LD_ARGS := -lpcre
 SRC_DIR = src
 BUILD_DIR = build
 DBG_NAME = $(name)_debug
@@ -16,7 +17,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 $(BUILD_DIR)/$(DBG_NAME): $(SRC)	
 	@echo $^
 	mkdir -p $(BUILD_DIR)
-	$(CC) $(CC_ARGS) $^ -o $@ -g
+	$(CC) $(CC_ARGS) $^ -o $@ -g $(LD_ARGS)
 	chmod +x $@
 
 debug: $(BUILD_DIR)/$(DBG_NAME)
@@ -24,7 +25,7 @@ debug: $(BUILD_DIR)/$(DBG_NAME)
 
 
 $(BUILD_DIR)/$(name): $(OBJ)
-	$(CC) $(OBJ) -o $@
+	$(CC) $(OBJ) -o $@ $(LD_ARGS)
 	chmod +x $@
 	rm build/*.o
 

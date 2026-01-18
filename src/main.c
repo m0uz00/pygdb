@@ -12,9 +12,8 @@ int main(int argc, char *argv[]){
 
   char* path = argv[1];
 
-  printf("Attempting to open: %s\n", path);
+  printf("Attempting to open: %s\n\n", path);
 
-  printf("No segfault yet");
   FILE* fp = fopen(path, "r+");
   if(!fp){
     perror("File cant be opened");
@@ -22,8 +21,6 @@ int main(int argc, char *argv[]){
   }
 
   parse(fp);
-
-  printf("Opened file :)");
 
   return 0;
 }
