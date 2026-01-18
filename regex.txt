@@ -2,4 +2,4 @@
 
 ^(?:def )\w+(?:.*\(\):) # find function but only capture function name
 
-^\w+(?:.+=.+) # matches assignment (find potential variable names)
+^(?:\t)?\w+(?:.+=.+) # matches assignment (find potential variable names)

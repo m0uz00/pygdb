@@ -23,7 +23,6 @@ $(BUILD_DIR)/$(DBG_NAME): $(SRC)
 debug: $(BUILD_DIR)/$(DBG_NAME)
 	gdb --args $< $(path)
 
-
 $(BUILD_DIR)/$(name): $(OBJ)
 	$(CC) $(OBJ) -o $@ $(LD_ARGS)
 	chmod +x $@

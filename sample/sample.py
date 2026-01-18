@@ -1,6 +1,7 @@
 def sum(a, b):
     return a + b
 
+# ts is a comment
 
 a=input("input num:")
 b = input("input num2:")

@@ -11,4 +11,6 @@ char* parse(FILE* path);
 
 line* find_first_line(list* lines);
 
+list* find_functions(list* lines);
+
 #endif
