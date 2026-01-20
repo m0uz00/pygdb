@@ -1,8 +1,8 @@
 name = pygdb
 path = sample/sample.py
 CC := gcc
-CC_ARGS := -I./include/ 
-LD_ARGS := -lpcre
+CC_ARGS := -I./include/ $(shell python3-config --cflags)
+LD_ARGS := -lpcre $(shell python3-config --ldflags)
 SRC_DIR = src
 BUILD_DIR = build
 DBG_NAME = $(name)_debug

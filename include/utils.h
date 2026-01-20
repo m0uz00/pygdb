@@ -26,6 +26,7 @@ struct program {
   list* funcs;
   list* vars;
   line* entry;
+  list* lines;
 } typedef program;
 
 list* append(list* list, list_item* item);

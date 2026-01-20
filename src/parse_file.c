@@ -8,7 +8,7 @@
 
 #define OVECCOUNT 30
 
-char* parse(FILE* f){
+program* parse(FILE* f){
   long length;
 
   fseek(f, 0, SEEK_END);
@@ -25,7 +25,7 @@ char* parse(FILE* f){
   int line_count = count_lines(buffer);
     
   char** lines_array = (char**)split_string(buffer, "\n");
-  if (!lines_array) return "error";
+  if (!lines_array) return NULL;
 
   list* lines = arr_to_list(lines_array, line_count);
   line* first_line = find_first_line(lines);
@@ -38,8 +38,13 @@ char* parse(FILE* f){
 
   list* functions = find_functions(lines);
 
+  program* program = malloc(sizeof(program));
+  program->lines = lines;
+  program->funcs = functions;
+  program->entry = first_line;
+
   free(buffer);
-  return "kys";
+  return program;
 }
 
 line* find_first_line(list* lines){
@@ -86,7 +91,7 @@ list* find_functions(list* lines){
     return NULL;
   }
 
-  list* functions;
+  list* functions = malloc(sizeof(list));
   functions->len = 0;
   
   pcre *re;
@@ -111,8 +116,8 @@ list* find_functions(list* lines){
     if (current_line != NULL && current_line->line_text != NULL){        
       rc = pcre_exec(re, NULL, subject, subject_len, 0, 0, ovector, OVECCOUNT);
       if (rc > 0){
+        printf("Found function: %s\n", current->line->line_text);
         functions = append(functions, current);
-        printf("found function, %s\n", current->line->line_text);
       }
     }
     current = current->next;

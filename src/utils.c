@@ -39,7 +39,14 @@ char** split_string(char* buffer, char* delim){
   return string_to_arr(buffer, lines, delim);
 }
 
-list* append(list* list, list_item* item){
+list* append(list* list, list_item* new_item){
+  list_item* item = malloc(sizeof(list_item));
+  line* line = malloc(sizeof(line));
+  line->line_text = new_item->line->line_text;
+  line->line_num = new_item->line->line_num;
+
+  item->line = line;
+
   if(list->len == 0){
     item->prev = NULL;
     item->next = NULL;

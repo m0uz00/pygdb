@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "../include/parse_file.h"
+#include "../include/run.h"
 
 int main(int argc, char *argv[]){
 
@@ -20,7 +21,10 @@ int main(int argc, char *argv[]){
     return 1;
   }
 
+  program* program = malloc(sizeof(program));
   parse(fp);
+
+  run_file(program);
 
   return 0;
 }

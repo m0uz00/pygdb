@@ -7,7 +7,7 @@
 #ifndef PARSE_FILE_H
 #define PARSE_FILE_H
 
-char* parse(FILE* path);
+program* parse(FILE* path);
 
 line* find_first_line(list* lines);
 
