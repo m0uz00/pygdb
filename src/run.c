@@ -5,20 +5,9 @@
 
 void run_file(program* program){
 
-  PyStatus status;
-  PyConfig config;
-  PyConfig_InitPythonConfig(&config);
+  Py_Initialize();
 
-  status = Py_InitializeFromConfig(&config);
-  if (PyStatus_Exception(status)) {
-    goto exception;
-  }
-  PyConfig_Clear(&config);
-  if (Py_FinalizeEx() < 0) {
-    exit(120);
-  }
+  PyRun_InteractiveLoop(stdin, "<stdin>");
 
-  exception:
-     PyConfig_Clear(&config);
-     Py_ExitStatusException(status);
+  Py_Finalize();  
 }
