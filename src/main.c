@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
   }
 
   program* program = malloc(sizeof(program));
-  parse(fp);
+  program = parse(fp);
 
   run_file(program);
 

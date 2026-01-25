@@ -43,7 +43,6 @@ program* parse(FILE* f){
   program->funcs = functions;
   program->entry = first_line;
 
-  free(buffer);
   return program;
 }
 
