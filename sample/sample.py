@@ -6,8 +6,8 @@ def prod(a, b):
 
 # ts is a comment
 
-a=input("input num:")
-b = input("input num2:")
+a=int(input("input num:"))
+b = int(input("input num2:"))
 
 result=sum(a,b)
 

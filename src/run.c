@@ -41,7 +41,12 @@ void wait_for_prompt_interactive(int python_out_fd, int python_in_fd) {
             if (bytes <= 0) break; 
 
             buffer[bytes] = '\0';
-            printf("%s", buffer); 
+            // if (strstr(buffer, ">>>") != NULL || strstr(buffer, "...") != NULL){
+            //   printf("%s", buffer + 3); 
+            // } else {
+            //   printf("%s", buffer);
+            // }
+            printf("%s", buffer);
             fflush(stdout);       
 
             strncat(accumulator, buffer, sizeof(accumulator) - strlen(accumulator) - 1);
